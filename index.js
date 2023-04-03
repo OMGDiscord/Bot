@@ -14,6 +14,12 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", (message) => {
+    if (message.content == "Fuck you"){
+        message.reply("Fuck you, Friena!, Go LEAVE , GO AWAY")
+    }
+    if (message.content == "fuck you"){
+        message.reply("Fuck you, Friena!, Go LEAVE , GO AWAY")
+    }
     if (message.content == "hi"){
         message.reply("Hi, Friena!")
     }
