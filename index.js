@@ -26,6 +26,18 @@ client.on("messageCreate", (message) => {
     if (message.content == "harm"){
         message.reply("Harm on you Friena!")
     }
+    if (message.content == "Hi"){
+        message.reply("Hi, Friena!")
+    }
+    if (message.content == "Hello"){
+        message.reply("Hello, Friena!")
+    }
+    if (message.content == "Hey"){
+        message.reply("Hey Friena!")
+    }
+    if (message.content == "Harm"){
+        message.reply("Harm on you Friena!")
+    }
     if (message.content == "nah"){
         message.reply("okay as you see")
     }
