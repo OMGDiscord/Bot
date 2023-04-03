@@ -14,6 +14,15 @@ client.on("ready", () => {
 })
 
 client.on("messageCreate", (message) => {
+    if (message.content == "what happend to arab craft minecraft server"){
+        message.reply("We had to Close it sadly for hardware resones")
+    }
+    if (message.content == "What happend to arab craft minecraft server"){
+        message.reply("We had to Close it sadly for hardware resones")
+    }
+    if (message.content == "What happend to Arab Craft Minecraft Server"){
+        message.reply("We had to Close it sadly for hardware resones")
+    }
     if (message.content == "Fuck you"){
         message.reply("Fuck you, Friena!, Go LEAVE , GO AWAY")
     }
