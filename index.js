@@ -76,7 +76,7 @@ client.on("messageCreate", (message) => {
     }
 })
 
-const welcomeChannelId = "1063001410360324166"
+const welcomeChannelId = "1092532367551385711"
 
 client.on("guildMemberAdd", (member) =>{
     member.guild.channels.cache.get(welcomeChannelId).send(`<@${member.id}>  Welcome to the server!`)
