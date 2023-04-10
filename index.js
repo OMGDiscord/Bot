@@ -1,7 +1,5 @@
 const Discord = require("discord.js")
 require("dotenv").config()
-const fs = require('fs');
-const swearWords = fs.readFileSync('./swear-words.txt', 'utf-8').split('\n');
 
 const client = new Discord.Client({
     intents: [
@@ -16,7 +14,6 @@ const prefix = "/";
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
 })
-
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -262,22 +259,6 @@ client.on('guildMemberAdd', member => {
 client.on("guildMemberRemove", (member) => {
   const channel = client.channels.cache.get('1094958643163713556'); // Replace 'INSERT_CHANNEL_ID_HERE' with the actual channel ID
   channel.send(`${member.user.tag} left the server.`); // Customized message to be sent in the channel
-});
-
-
-client.on('messageCreate', message => {
-  // Check if the message author is a bot or if the message is in a DM channel
-  if (message.author.bot || message.channel.type === 'DM') return;
-  
-  // Check if the message contains any swear words
-  const messageWords = message.content.toLowerCase().split(' ');
-  const containsSwear = messageWords.some(word => swearWords.includes(word));
-
-  if (containsSwear) {
-    // Delete the message and reply with a warning message
-    message.delete();
-    message.reply('Please refrain from using profanity in this server. Your message has been deleted.');
-  }
 });
 
 client.login('INSERT_DISCORD_BOT_TOKEN_HERE');
