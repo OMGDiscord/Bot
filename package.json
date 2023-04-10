@@ -9,6 +9,7 @@
   "author": "Omar Hany Kasban",
   "license": "ISC",
   "dependencies": {
+    "discord": "^0.8.2",
     "discord.js": "^13.8.0",
     "dotenv": "^16.0.1"
   }
