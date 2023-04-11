@@ -198,12 +198,6 @@ client.on("messageCreate", (message) => {
     if (message.content == "What happend to Arab Craft Minecraft Server"){
         message.reply("We had to Close it sadly for hardware resones")
     }
-    if (message.content == "Fuck you"){
-        message.reply("Fuck you, Friena!, Go LEAVE , GO AWAY")
-    }
-    if (message.content == "fuck you"){
-        message.reply("Fuck you, Friena!, Go LEAVE , GO AWAY")
-    }
     if (message.content == "hi"){
         message.reply("Hi, Friena!")
     }
@@ -261,5 +255,32 @@ client.on("guildMemberRemove", (member) => {
   channel.send(`${member.user.tag} left the server.`); // Customized message to be sent in the channel
 });
 
+client.on('message', message => {
+  if ((message.content.includes('http') || message.content.includes('https') || message.content.includes('www.')) && !message.member.hasPermission('ADMINISTRATOR')) { // check if the message contains a link and the user is not an administrator
+    message.delete(); // delete the message
+    message.reply('Sorry, you are not allowed to post links in this server! Your message has been deleted.') // send a warning message to the person
+      .then(msg => {
+        setTimeout(() => {
+          msg.delete(); // delete the warning message after 5 seconds
+        }, 5000); // set the delay to 5 seconds (5000 milliseconds)
+      })
+      .catch(console.error);
+  }
+});
+
+const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`']; //create an array of swear words
+
+client.on('message', message => {
+  if (swearWords.some(word => message.content.toLowerCase().includes(word))) { //check if message content includes any swear words
+    message.delete(); //delete the message
+    message.reply('Sorry, you are not allowed to swear in this server! Your message has been deleted.')
+      .then(msg => {
+        setTimeout(() => {
+          msg.delete(); //delete the warning message after 5 seconds
+        }, 15000); //set the delay to 15 seconds (15000 milliseconds)
+      })
+      .catch(console.error);
+  }
+});
 client.login('INSERT_DISCORD_BOT_TOKEN_HERE');
 client.login(process.env.TOKEN)
