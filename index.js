@@ -286,5 +286,4 @@ client.on('message', message => {
       .catch(console.error);
   }
 });
-client.login('INSERT_DISCORD_BOT_TOKEN_HERE');
 client.login(process.env.TOKEN)
