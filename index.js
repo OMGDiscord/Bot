@@ -156,7 +156,7 @@ if (command === "meme") {
     message.channel.send({ embeds: [embed] });
   }
 if (command === "adminhelp") {
-  if (message.member.hasPermission('ADMINISTRATOR')) { // check if the user is an administrator
+  if (message.member.permissions.has('ADMINISTRATOR')) { // check if the user is an administrator
     // Create an embed with the list of commands
     const embed = new Discord.MessageEmbed()
       .setColor('#0099ff')
