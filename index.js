@@ -261,8 +261,8 @@ client.on('message', message => {
     message.reply('Sorry, you are not allowed to post links in this server! Your message has been deleted.') // send a warning message to the person
       .then(msg => {
         setTimeout(() => {
-          msg.delete(); // delete the warning message after 5 seconds
-        }, 5000); // set the delay to 5 seconds (5000 milliseconds)
+          msg.delete(); // delete the warning message after 15 seconds
+        }, 15000); // set the delay to 15 seconds (15000 milliseconds)
       })
       .catch(console.error);
   }
@@ -276,7 +276,7 @@ client.on('message', message => {
     message.reply('Sorry, you are not allowed to swear in this server! Your message has been deleted.')
       .then(msg => {
         setTimeout(() => {
-          msg.delete(); //delete the warning message after 5 seconds
+          msg.delete(); //delete the warning message after 15 seconds
         }, 15000); //set the delay to 15 seconds (15000 milliseconds)
       })
       .catch(console.error);
