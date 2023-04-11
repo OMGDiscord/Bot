@@ -155,7 +155,8 @@ if (command === "meme") {
     // Reply to the message with the embed
     message.channel.send({ embeds: [embed] });
   }
-  if (command === "adminhelp") {
+if (command === "adminhelp") {
+  if (message.member.hasPermission('ADMINISTRATOR')) { // check if the user is an administrator
     // Create an embed with the list of commands
     const embed = new Discord.MessageEmbed()
       .setColor('#0099ff')
@@ -170,7 +171,10 @@ if (command === "meme") {
 
     // Reply to the message with the embed
     message.channel.send({ embeds: [embed] });
+  } else { // show an error message if the user is not an administrator
+    message.reply("Sorry, only administrators can use this command.");
   }
+}
 });
 
 client.on("messageCreate", (message) => {
