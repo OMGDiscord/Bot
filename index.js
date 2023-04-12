@@ -245,7 +245,7 @@ client.on("guildMemberRemove", (member) => {
 client.on('message', message => {
   if (message.author.bot) return; // ignore messages from other bots
   if (!message.guild) return; // ignore DMs
-  if ((message.content.includes('http') || message.content.includes('https') || message.content.includes('www.')) && !message.member.hasPermission('ADMINISTRATOR')) { // check if the message contains a link and the user is not an administrator
+  if ((message.content.includes('http') || message.content.includes('https') || message.content.includes('www.')) && !message.member.roles.cache.some(role => role.permissions.has('ADMINISTRATOR'))) { // check if the message contains a link and the user is not an administrator
     message.delete(); // delete the message
     message.reply('Sorry, you are not allowed to post links in this server! Your message has been deleted.') // send a warning message to the person
       .then(msg => {
@@ -329,7 +329,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
   const guild = oldMember.guild;
   const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
   if (modLogChannel) {
-    modLogChannel.send(`User ${oldMember} has been updated to ${newMember}`);
+    modLogChannel.send(`User ${oldMember} has been updated to ${newMember} `);
   }
 });
 
@@ -363,5 +363,14 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     }
   }
 });
-
+// Nickname update listener
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  if (oldMember.nickname !== newMember.nickname) { // check if the nickname has changed
+    const guild = oldMember.guild;
+    const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+    if (modLogChannel) {
+      modLogChannel.send(`User ${oldMember.displayName}'s nickname has been set to ${newMember.nickname || newMember.user.username}`);
+    }
+  }
+});
 client.login(process.env.TOKEN)
