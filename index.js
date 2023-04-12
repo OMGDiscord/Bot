@@ -269,4 +269,74 @@ client.on('message', message => {
       .catch(console.error);
   }
 });
+
+
+client.on('guildMemberAdd', (member) => {
+  const guild = member.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`Welcome to the server, ${member}!`);
+  }
+});
+
+client.on('guildMemberRemove', (member) => {
+  const guild = member.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`${member} has left the server.`);
+  }
+});
+
+client.on('messageDelete', (message) => {
+  const guild = message.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`A message by ${message.author.tag} was deleted in ${message.channel}: "${message.content}"`);
+  }
+});
+// Channel update listener
+client.on('channelUpdate', (oldChannel, newChannel) => {
+  const guild = oldChannel.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`Channel ${oldChannel.name} has been updated to ${newChannel.name}`);
+  }
+});
+
+// Channel create listener
+client.on('channelCreate', (channel) => {
+  const guild = channel.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`New channel created: ${channel.name}`);
+  }
+});
+
+// Channel delete listener
+client.on('channelDelete', (channel) => {
+  const guild = channel.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`Channel deleted: ${channel.name}`);
+  }
+});
+
+
+// User update listener
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  const guild = oldMember.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`User ${oldMember} has been updated to ${newMember}`);
+  }
+});
+
+// Edited messages listener
+client.on('messageUpdate', (oldMessage, newMessage) => {
+  const guild = oldMessage.guild;
+  const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  if (modLogChannel) {
+    modLogChannel.send(`A message by ${oldMessage.author.tag} was edited in ${oldMessage.channel}: "${oldMessage.content}" was changed to "${newMessage.content}"`);
+  }
+});
 client.login(process.env.TOKEN)
