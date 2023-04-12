@@ -179,48 +179,39 @@ if (command === "adminhelp") {
 });
 
 client.on("messageCreate", (message) => {
-  if (message.author.bot) return; // Exit the loop if the message was sent by a bot
-  if (message.content.toLowerCase().includes("what happened to arab craft minecraft server")) {
-    message.reply("We had to close it sadly for hardware reasons.");
-    return; // Exit the loop to prevent additional replies
-  }
-  if (message.content.toLowerCase().includes("hi halal")) {
-    message.reply("SO HALAL MODE.");
-    return;
-  }
-  if (message.content.toLowerCase().includes("hi bitch")) {
-    message.reply("SO HARAM MODE.");
-    return;
-  }
-  if (message.content.toLowerCase().includes("hi")) {
+  if (message.author.bot) return;
+
+  const lowerCaseMessage = message.content.toLowerCase();
+
+  if (lowerCaseMessage === "hi") {
     message.reply("Hi, Frineda!");
     return;
   }
-  if (message.content.toLowerCase().includes("hello")) {
+  if (lowerCaseMessage === "hello") {
     message.reply("Hello, Frineda!");
     return;
   }
-  if (message.content.toLowerCase().includes("hey")) {
+  if (lowerCaseMessage === "hey") {
     message.reply("Hey, Frineda!");
     return;
   }
-  if (message.content.toLowerCase().includes("harm")) {
+  if (lowerCaseMessage === "harm") {
     message.reply("Harm on you, Frineda!");
     return;
   }
-  if (message.content.toLowerCase().includes("nah")) {
+  if (lowerCaseMessage === "nah") {
     message.reply("Okay, as you see.");
     return;
   }
-  if (message.content.toLowerCase().includes("$help")) {
+  if (lowerCaseMessage === "$help") {
     message.reply("This command moved to `/help` while Discord doesn't register commands. It's working.");
     return;
   }
-  if (message.content.toLowerCase().includes("hey it works")) {
+  if (lowerCaseMessage === "hey it works") {
     message.reply("What works, Frineda?");
     return;
   }
-  if (message.content.toLowerCase().includes("it works now")) {
+  if (lowerCaseMessage === "it works now") {
     message.reply("What works, Frineda?");
     return;
   }
