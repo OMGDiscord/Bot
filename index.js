@@ -179,70 +179,52 @@ if (command === "adminhelp") {
 });
 
 client.on("messageCreate", (message) => {
-    if (message.content == "what happend to arab craft minecraft server"){
-        message.reply("We had to Close it sadly for hardware resones")
-    }
-    if (message.content == "hi halal"){
-        message.reply("SO HALAL MODE")
-    }
-    if (message.content == "Hi Halal"){
-        message.reply("SO HALAL MODE")
-    }
-    if (message.content == "Hi halal"){
-        message.reply("SO HALAL MODE")
-    }
-    if (message.content == "hi bitch"){
-        message.reply("SO HARAM MODE")
-    }
-    if (message.content == "Hi bitch"){
-        message.reply("SO HARAM MODE")
-    }
-    if (message.content == "What happend to arab craft minecraft server"){
-        message.reply("We had to Close it sadly for hardware resones")
-    }
-    if (message.content == "What happend to Arab Craft Minecraft Server"){
-        message.reply("We had to Close it sadly for hardware resones")
-    }
-    if (message.content == "hi"){
-        message.reply("Hi, Friena!")
-    }
-    if (message.content == "hello"){
-        message.reply("Hello, Friena!")
-    }
-    if (message.content == "hey"){
-        message.reply("Hey Friena!")
-    }
-    if (message.content == "harm"){
-        message.reply("Harm on you Friena!")
-    }
-    if (message.content == "Hi"){
-        message.reply("Hi, Friena!")
-    }
-    if (message.content == "Hello"){
-        message.reply("Hello, Friena!")
-    }
-    if (message.content == "Hey"){
-        message.reply("Hey Friena!")
-    }
-    if (message.content == "Harm"){
-        message.reply("Harm on you Friena!")
-    }
-    if (message.content == "nah"){
-        message.reply("okay as you see")
-    }
-    if (message.content == "yeah good bot"){
-        message.reply("ok, thanks its good from you")
-    }
-    if (message.content == "$help"){
-        message.reply("Nothing yet + this Very Basic Bot")
-    }
-    if (message.content == "hey it works"){
-        message.reply("what works frineda?")
-    }
-    if (message.content == "it works"){
-        message.reply("what works frineda?")
-    }
-})
+  if (message.author.bot) return; // Exit the loop if the message was sent by a bot
+  if (message.content.toLowerCase().includes("what happened to arab craft minecraft server")) {
+    message.reply("We had to close it sadly for hardware reasons.");
+    return; // Exit the loop to prevent additional replies
+  }
+  if (message.content.toLowerCase().includes("hi halal")) {
+    message.reply("SO HALAL MODE.");
+    return;
+  }
+  if (message.content.toLowerCase().includes("hi bitch")) {
+    message.reply("SO HARAM MODE.");
+    return;
+  }
+  if (message.content.toLowerCase().includes("hi")) {
+    message.reply("Hi, Frineda!");
+    return;
+  }
+  if (message.content.toLowerCase().includes("hello")) {
+    message.reply("Hello, Frineda!");
+    return;
+  }
+  if (message.content.toLowerCase().includes("hey")) {
+    message.reply("Hey, Frineda!");
+    return;
+  }
+  if (message.content.toLowerCase().includes("harm")) {
+    message.reply("Harm on you, Frineda!");
+    return;
+  }
+  if (message.content.toLowerCase().includes("nah")) {
+    message.reply("Okay, as you see.");
+    return;
+  }
+  if (message.content.toLowerCase().includes("$help")) {
+    message.reply("This command moved to `/help` while Discord doesn't register commands. It's working.");
+    return;
+  }
+  if (message.content.toLowerCase().includes("hey it works")) {
+    message.reply("What works, Frineda?");
+    return;
+  }
+  if (message.content.toLowerCase().includes("it works now")) {
+    message.reply("What works, Frineda?");
+    return;
+  }
+});
 
 const welcomeChannelId = "1092532367551385711"
 
