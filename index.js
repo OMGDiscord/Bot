@@ -215,6 +215,18 @@ client.on("messageCreate", (message) => {
     message.reply("What works, Frineda?");
     return;
   }
+  if (lowerCaseMessage === "what happened to arab craft minecraft server") {
+    message.reply("We had to close it sadly for hardware reasons.");
+    return;
+  }
+  if (lowerCaseMessage === "hi halal") {
+    message.reply("SO HALAL MODE.");
+    return;
+  }
+  if (lowerCaseMessage === "hi bitch") {
+    message.reply("SO HARAM MODE.");
+    return;
+  }
 });
 
 const welcomeChannelId = "1092532367551385711"
