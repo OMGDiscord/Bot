@@ -243,6 +243,8 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on('message', message => {
+  if (message.author.bot) return; // ignore messages from other bots
+  if (!message.guild) return; // ignore DMs
   if ((message.content.includes('http') || message.content.includes('https') || message.content.includes('www.')) && !message.member.hasPermission('ADMINISTRATOR')) { // check if the message contains a link and the user is not an administrator
     message.delete(); // delete the message
     message.reply('Sorry, you are not allowed to post links in this server! Your message has been deleted.') // send a warning message to the person
@@ -339,4 +341,27 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     modLogChannel.send(`A message by ${oldMessage.author.tag} was edited in ${oldMessage.channel}: "${oldMessage.content}" was changed to "${newMessage.content}"`);
   }
 });
+// Role add listener
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  // Check if roles were added to the member
+  const addedRoles = newMember.roles.cache.filter(role => !oldMember.roles.cache.has(role.id));
+  if (addedRoles.size > 0) {
+    const guild = oldMember.guild;
+    const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+    if (modLogChannel) {
+      modLogChannel.send(`User ${newMember.displayName} has been given the role(s): ${addedRoles.map(role => role.name).join(', ')}`);
+    }
+  }
+  
+  // Check if roles were removed from the member
+  const removedRoles = oldMember.roles.cache.filter(role => !newMember.roles.cache.has(role.id));
+  if (removedRoles.size > 0) {
+    const guild = oldMember.guild;
+    const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+    if (modLogChannel) {
+      modLogChannel.send(`User ${newMember.displayName} has had the role(s): ${removedRoles.map(role => role.name).join(', ')} removed`);
+    }
+  }
+});
+
 client.login(process.env.TOKEN)
