@@ -390,7 +390,6 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 const https = require('https');
 const fs = require('fs');
 const path = require('path'); // <- Add this line
-const attachment = new MessageAttachment(path.join(__dirname, 'd.mp3'));
 client.on('message', async msg => {
     if (msg.attachments.size > 0) {
         const attachment = msg.attachments.first();
