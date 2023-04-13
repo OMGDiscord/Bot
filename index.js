@@ -157,6 +157,8 @@ if (command === "meme") {
         { name: '/ping', value: 'Pings the bot to check if it is working' },
         { name: '/meme', value: 'Displays a random meme from r/memes' },
 		{ name: '/upload', value: 'Uploads a secrect File' },
+        { name: '/resones-why-to-never-upgrade-to-windows-11', value: 'Bad but pepole asked for it' },
+
         // Add more command fields here if needed
       );
 
@@ -406,5 +408,24 @@ client.on('message', async msg => {
     }
 });
 
+client.on('messageCreate', message => {
+  if (message.content.startsWith('/resones-why-to-never-upgrade-to-windows-11')) {
+    const reasons = [
+      'Not all programs and hardware are compatible with Windows 11.',
+      'Windows 10 already works well for most users and is still supported until 2025.',
+      'Windows 11 requires higher system requirements, which may not be affordable or feasible for some users.',
+      'There may be bugs and issues with the initial release of Windows 11 that still need to be addressed.',
+      'Some users prefer the interface and experience of Windows 10 over Windows 11.',
+      'Windows 11 may introduce new or unnecessary features that some users do not want or need.',
+      'Upgrading to Windows 11 may require reinstalling applications and data, which can be time-consuming and arduous for some users.'
+    ];
 
+    // Choose a random reason from the array
+    const randomIndex = Math.floor(Math.random() * reasons.length);
+    const randomReason = reasons[randomIndex];
+
+    // Send the random reason as a message
+    message.channel.send(`Here's a reason not to upgrade to Windows 11: ${randomReason}`);
+  }
+});
 client.login(process.env.TOKEN)
