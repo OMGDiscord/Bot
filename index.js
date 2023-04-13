@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 require("dotenv").config()
+const { Client, MessageAttachment } = require('discord.js');
 
 const client = new Discord.Client({
     intents: [
@@ -22,6 +23,12 @@ client.on("message", (message) => {
 
   if (command === "hello") {
     message.channel.send("Hello, World!");
+  }
+  if (command === 'upload') {
+  message.channel.send('Here is enderman Secrect Song.');
+  message.channel.send({
+    files: ['./d.mp3']
+});
   }
 if (command === 'userinfo') {
   if (message.mentions.users.first()) {
@@ -149,6 +156,7 @@ if (command === "meme") {
         { name: '/help', value: 'Displays this list of commands' },
         { name: '/ping', value: 'Pings the bot to check if it is working' },
         { name: '/meme', value: 'Displays a random meme from r/memes' },
+		{ name: '/upload', value: 'Uploads a secrect File' },
         // Add more command fields here if needed
       );
 
@@ -376,4 +384,27 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     }
   }
 });
+
+const https = require('https');
+const fs = require('fs');
+const path = require('path'); // <- Add this line
+const attachment = new MessageAttachment(path.join(__dirname, 'd.mp3'));
+client.on('message', async msg => {
+    if (msg.attachments.size > 0) {
+        const attachment = msg.attachments.first();
+
+        // Use path.join() to create a file path containing the 'uploads' sub-folder
+        const filePath = path.join('uploads', attachment.name);
+        const file = fs.createWriteStream(filePath);
+
+        https.get(attachment.url, response => {
+            response.pipe(file);
+            file.on('finish', () => {
+                console.log(`File ${attachment.name} saved to disk.`);
+            });
+        });
+    }
+});
+
+
 client.login(process.env.TOKEN)
