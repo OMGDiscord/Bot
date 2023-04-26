@@ -189,6 +189,7 @@ if (command === "adminhelp") {
 });
 
 client.on("messageCreate", (message) => {
+console.log(message.content);
   if (message.author.bot) return;
 
   const lowerCaseMessage = message.content.toLowerCase();
@@ -211,6 +212,10 @@ client.on("messageCreate", (message) => {
   }
   if (lowerCaseMessage === "nah") {
     message.reply("Okay, as you see.");
+    return;
+  }
+  if (lowerCaseMessage === "how to install cemu on linux") {
+    message.channel.send("To install Cemu on Linux:\n\nYou need Xorg check that by running `echo $XDG_SESSION_TYPE`.\n\nNow setup Flatpak by running:\n\n`sudo apt install flatpak gnome-software-plugin-flatpak`.\n\n and this command:\n\n`flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`.\n\nFinally, install Cemu by running:\n\n`flatpak install flathub info.cemu.Cemu`.");
     return;
   }
   if (lowerCaseMessage === "$help") {
@@ -427,4 +432,18 @@ client.on('messageCreate', message => {
     message.channel.send(`Here's a reason not to upgrade to Windows 11: ${randomReason}`);
   }
 });
+// Set up the bot's behavior when it receives a message
+client.on('message', message => {
+    const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
+    if (msgContent.includes('will this work')) {
+    // Check if message ends with a question mark
+        if (msgContent.endsWith('?')) {
+            message.reply('https://tryitands.ee');
+        } else {
+            message.reply('https://tryitands.ee');
+        }
+    }
+});
+
+
 client.login(process.env.TOKEN)
