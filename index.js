@@ -400,7 +400,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 const https = require('https');
 const fs = require('fs');
 const path = require('path'); // <- Add this line
-client.on('message', async msg => {
+/* client.on('message', async msg => {
     if (msg.attachments.size > 0) {
         const attachment = msg.attachments.first();
 
@@ -416,6 +416,7 @@ client.on('message', async msg => {
         });
     }
 });
+*/
 
 client.on('messageCreate', message => {
   if (message.content.startsWith('/resones-why-to-never-upgrade-to-windows-11')) {
