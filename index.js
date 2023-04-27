@@ -155,6 +155,7 @@ if (command === "meme") {
       .addFields(
         { name: '/help', value: 'Displays this list of commands' },
         { name: '/ping', value: 'Pings the bot to check if it is working' },
+        { name: '/userinfo', value: 'To see Your or A user Info' },
         { name: '/meme', value: 'Displays a random meme from r/memes' },
 		{ name: '/upload', value: 'Uploads a secrect File' },
         { name: '/resones-why-to-never-upgrade-to-windows-11', value: 'Bad but pepole asked for it' },
@@ -215,7 +216,7 @@ console.log(message.content);
     return;
   }
   if (lowerCaseMessage === "how to install cemu on linux") {
-    message.channel.send("To install Cemu on Linux:\n\nYou need Xorg check that by running `echo $XDG_SESSION_TYPE`.\n\nNow setup Flatpak by running:\n\n`sudo apt install flatpak gnome-software-plugin-flatpak`.\n\n and this command:\n\n`flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`.\n\nFinally, install Cemu by running:\n\n`flatpak install flathub info.cemu.Cemu`.");
+    message.reply("https://boisterous-toffee-60cc83.netlify.app/cemu-on-linux");
     return;
   }
   if (lowerCaseMessage === "$help") {
