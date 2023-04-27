@@ -10,7 +10,7 @@ const client = new Discord.Client({
     ]
 })
 
-const prefix = "/";
+const prefix = "!";
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
@@ -28,6 +28,7 @@ client.on("message", (message) => {
   message.channel.send('Here is enderman Secrect Song.');
   message.channel.send({
     files: ['./d.mp3']
+  
 });
   }
 if (command === 'userinfo') {
@@ -153,12 +154,12 @@ if (command === "meme") {
       .setTitle('Bot Commands')
       .setDescription('Here are the available commands for this bot:')
       .addFields(
-        { name: '/help', value: 'Displays this list of commands' },
-        { name: '/ping', value: 'Pings the bot to check if it is working' },
-        { name: '/userinfo', value: 'To see Your or A user Info' },
-        { name: '/meme', value: 'Displays a random meme from r/memes' },
-		{ name: '/upload', value: 'Uploads a secrect File' },
-        { name: '/resones-why-to-never-upgrade-to-windows-11', value: 'Bad but pepole asked for it' },
+        { name: '!help', value: 'Displays this list of commands' },
+        { name: '!ping', value: 'Pings the bot to check if it is working' },
+        { name: '!userinfo', value: 'To see Your or A user Info' },
+        { name: '!meme', value: 'Displays a random meme from r/memes' },
+	{ name: '!upload', value: 'Uploads a secrect File' },
+        { name: '!resones-why-to-never-upgrade-to-windows-11', value: 'Bad but pepole asked for it' },
 
         // Add more command fields here if needed
       );
@@ -177,7 +178,7 @@ if (command === "adminhelp") {
         { name: '/adminhelp', value: 'Displays this list of commands' },
         { name: '/giverole', value: 'Gives a role to a User' },
         { name: '/removerole', value: 'Removes a Role from User' },
-		{ name: '/clear', value: 'To clear the chat from 1 - 99 messages' },
+	{ name: '/clear', value: 'To clear the chat from 1 - 99 messages' },
         // Add more command fields here if needed
       );
 
@@ -195,7 +196,7 @@ console.log(message.content);
 
   const lowerCaseMessage = message.content.toLowerCase();
 
-  if (lowerCaseMessage === "hi") {
+  /* if (lowerCaseMessage === "hi") {
     message.reply("Hi, Frineda!");
     return;
   }
@@ -244,6 +245,7 @@ console.log(message.content);
     return;
   }
 });
+*/
 
 const welcomeChannelId = "1092532367551385711"
 
@@ -261,7 +263,7 @@ client.on("guildMemberRemove", (member) => {
   channel.send(`${member.user.tag} left the server.`); // Customized message to be sent in the channel
 });
 
-client.on('message', message => {
+/* client.on('message', message => {
   if (message.author.bot) return; // ignore messages from other bots
   if (!message.guild) return; // ignore DMs
   if ((message.content.includes('http') || message.content.includes('https') || message.content.includes('www.')) && !message.member.roles.cache.some(role => role.permissions.has('ADMINISTRATOR'))) { // check if the message contains a link and the user is not an administrator
@@ -275,10 +277,11 @@ client.on('message', message => {
       .catch(console.error);
   }
 });
+*/
 
-const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`']; //create an array of swear words
+// const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`']; //create an array of swear words
 
-client.on('message', message => {
+/* client.on('message', message => {
   if (swearWords.some(word => message.content.toLowerCase().includes(word))) { //check if message content includes any swear words
     message.delete(); //delete the message
     message.reply('Sorry, you are not allowed to swear in this server! Your message has been deleted.')
@@ -290,6 +293,7 @@ client.on('message', message => {
       .catch(console.error);
   }
 });
+*/
 
 
 client.on('guildMemberAdd', (member) => {
