@@ -175,10 +175,10 @@ if (command === "adminhelp") {
       .setTitle('Bot Admin Commands')
       .setDescription('Here are the available admin commands for this bot:')
       .addFields(
-        { name: '/adminhelp', value: 'Displays this list of commands' },
-        { name: '/giverole', value: 'Gives a role to a User' },
-        { name: '/removerole', value: 'Removes a Role from User' },
-	{ name: '/clear', value: 'To clear the chat from 1 - 99 messages' },
+        { name: '!adminhelp', value: 'Displays this list of commands' },
+        { name: '!giverole', value: 'Gives a role to a User' },
+        { name: '!removerole', value: 'Removes a Role from User' },
+	{ name: '!clear', value: 'To clear the chat from 1 - 99 messages' },
         // Add more command fields here if needed
       );
 
