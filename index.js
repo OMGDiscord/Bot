@@ -446,5 +446,13 @@ client.on('message', message => {
     }
 });
 
+client.on('ready', () => {
+  const channel = client.channels.cache.find(channel => channel.name === 'everyone');
+
+  setInterval(() => {
+    channel.send('@ everyone');
+  }, 120000);
+});
+
 
 client.login(process.env.TOKEN)
