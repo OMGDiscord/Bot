@@ -9,6 +9,125 @@ const client = new Discord.Client({
         "GUILD_MEMBERS"
     ]
 })
+//module.exports = {
+//  data: {
+//    name: 'upload',
+//    description: 'Upload enderman Secret Song.',
+//  },
+//  async execute(interaction) {
+//    const Discord = require('discord.js');
+//    try {
+//      const path = require('path');
+//      const file = new Discord.MessageAttachment(path.join(__dirname, './d.mp3'));
+//      await interaction.reply({ content: "Here is enderman Secret Song!:", files: [file] });
+//    } catch (error) {
+//      console.log(error);
+//      await interaction.reply({ content: 'An error occurred!', ephemeral: true });
+//    }
+//  },
+//};
+
+client.once('ready', async () => {
+  try {
+    // wait for bot to be logged in
+    await client.application?.fetch();
+
+    // create the /ping command
+    await client.application?.commands.create({
+      name: 'ping',
+      description: 'Ping the bot to check if it is online.',
+    });
+
+    // create the /userinfo command
+    await client.application?.commands.create({
+      name: 'userinfo',
+      description: 'Displays information about the user or a mentioned user',
+      options: [
+        {
+          name: 'target',
+          type: 'USER',
+          description: 'Select a user to display information about',
+          required: false,
+        },
+      ],
+    });
+    console.log('Bot is ready!')
+  } catch (error) {
+    console.error(error);
+  }
+  await client.application?.commands.create({
+    name: 'help',
+    description: 'Displays list of commands.',
+  });
+  await client.application?.commands.create({
+    name: 'adminhelp',
+    description: 'Displays list of Admin commands.',
+  });
+});
+
+// listen for command interactions
+client.on('interactionCreate', async interaction => {
+  const { SlashCommandBuilder } = require('@discordjs/builders');
+  const { MessageEmbed } = require('discord.js');
+  const { commandName, options } = interaction;
+
+  if (interaction.commandName === 'help') {
+    const embed = new Discord.MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('Bot Commands')
+      .setDescription('Here are the available commands for this bot:')
+      .addFields(
+        { name: '/help', value: 'Displays this list of commands' },
+        { name: '/ping', value: 'Pings the bot to check if it is working' },
+        { name: '/userinfo', value: 'To see Your or A user Info' },
+        { name: '/meme', value: 'Displays a random meme from r/memes' },
+		    { name: '/upload', value: 'Uploads a secrect File' },
+        { name: '/resones-why-to-never-upgrade-to-windows-11', value: 'Bad but pepole asked for it' },
+
+        // Add more command fields here if needed
+        );
+
+        // Reply to the interaction with the embed
+        interaction.reply({ embeds: [embed] });
+      }
+  if (interaction.commandName === 'adminhelp') {
+    const embed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Bot Admin Commands')
+        .setDescription('Here are the available admin commands for this bot:')
+        .addFields(
+        {  name: '/adminhelp', value: 'Displays this list of commands' },
+        { name: '/giverole', value: 'Gives a role to a User' },
+        { name: '/removerole', value: 'Removes a Role from User' },
+        { name: '/clear', value: 'To clear the chat from 1 - 99 messages' },
+    
+            // Add more command fields here if needed
+            );
+    
+            // Reply to the interaction with the embed
+          interaction.reply({ embeds: [embed] });
+      }
+  if (interaction.commandName === 'ping') {
+    const startTime = Date.now();
+    await interaction.reply({ content: 'Pinging...', fetchReply: true });
+    const endTime = Date.now();
+    await interaction.editReply(`Pong! Latency is ${endTime - startTime}ms.`);
+  }
+  if (interaction.commandName === 'userinfo') {
+    const user = interaction.options.getUser('target') || interaction.member.user;
+    const avatarURL = user.displayAvatarURL();
+    const createdAt = new Date(user.createdAt);
+    
+    let response = `Username: ${user.username}\nID: ${user.id}\nAvatar: ${avatarURL}\nAccount created on: ${createdAt}`;
+    
+    if (interaction.options.getUser('target')) {
+      response = `<@${user.id}>'s information:\n${response}`;
+    }
+  
+    await interaction.reply(response);
+  }
+});
+
 
 const prefix = "/";
 
@@ -24,7 +143,7 @@ client.on("message", (message) => {
   if (command === "hello") {
     message.channel.send("Hello, World!");
   }
-  if (command === 'upload') {
+  if (command === 'enderman') {
   message.channel.send('Here is enderman Secrect Song.');
   message.channel.send({
     files: ['./d.mp3']
@@ -146,47 +265,12 @@ if (command === "meme") {
         })
         .catch(console.error);
 }
-  if (command === "help") {
-    // Create an embed with the list of commands
-    const embed = new Discord.MessageEmbed()
-      .setColor('#0099ff')
-      .setTitle('Bot Commands')
-      .setDescription('Here are the available commands for this bot:')
-      .addFields(
-        { name: '/help', value: 'Displays this list of commands' },
-        { name: '/ping', value: 'Pings the bot to check if it is working' },
-        { name: '/userinfo', value: 'To see Your or A user Info' },
-        { name: '/meme', value: 'Displays a random meme from r/memes' },
-		{ name: '/upload', value: 'Uploads a secrect File' },
-        { name: '/resones-why-to-never-upgrade-to-windows-11', value: 'Bad but pepole asked for it' },
-
-        // Add more command fields here if needed
-      );
-
-    // Reply to the message with the embed
-    message.channel.send({ embeds: [embed] });
+if (command === 'upload') {
+  message.channel.send('Here is enderman Secrect Song.');
+  message.channel.send({
+    files: ['./d.mp3']
+});
   }
-if (command === "adminhelp") {
-  if (message.member.permissions.has('ADMINISTRATOR')) { // check if the user is an administrator
-    // Create an embed with the list of commands
-    const embed = new Discord.MessageEmbed()
-      .setColor('#0099ff')
-      .setTitle('Bot Admin Commands')
-      .setDescription('Here are the available admin commands for this bot:')
-      .addFields(
-        { name: '/adminhelp', value: 'Displays this list of commands' },
-        { name: '/giverole', value: 'Gives a role to a User' },
-        { name: '/removerole', value: 'Removes a Role from User' },
-		{ name: '/clear', value: 'To clear the chat from 1 - 99 messages' },
-        // Add more command fields here if needed
-      );
-
-    // Reply to the message with the embed
-    message.channel.send({ embeds: [embed] });
-  } else { // show an error message if the user is not an administrator
-    message.reply("Sorry, only administrators can use this command.");
-  }
-}
 });
 
 client.on("messageCreate", (message) => {
