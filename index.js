@@ -529,4 +529,9 @@ client.on('message', message => {
         }
     }
 });
+client.on('message', message => {
+  if (message.content.toLowerCase() === 'gofy a phone') {
+    message.reply('https://www.youtube.com/shorts/i2--25-N3vs');
+  }
+});
 client.login(process.env.TOKEN)
