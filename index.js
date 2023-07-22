@@ -362,7 +362,7 @@ client.on('message', message => {
 const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`'];
 
 client.on('message', message => {
-  if (!message.author.bot && swearWords.some(word => message.content.toLowerCase().includes(word))) {
+  if (!message.author.bot && swearWords.some(word => message.content.toLowerCase().match(`\\b${word}\\b`))) {
     if (!message.member.roles.cache.some(role => role.name === 'Owner')) {
       message.delete().catch(console.error);
 
@@ -376,7 +376,6 @@ client.on('message', message => {
     }
   }
 });
-
 
 client.on('guildMemberAdd', (member) => {
   const guild = member.guild;
