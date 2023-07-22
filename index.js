@@ -274,7 +274,6 @@ if (command === 'upload') {
 });
 
 client.on("messageCreate", (message) => {
-console.log(message.content);
   if (message.author.bot) return;
 
   const lowerCaseMessage = message.content.toLowerCase();
@@ -360,16 +359,17 @@ client.on('message', message => {
   }
 });
 
-const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`']; //create an array of swear words
+const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`'];
 
 client.on('message', message => {
-  if (swearWords.some(word => message.content.toLowerCase().includes(word))) { //check if message content includes any swear words
-    message.delete(); //delete the message
+  if (swearWords.some(word => message.content.toLowerCase().includes(word)) && !message.author.bot) {
+    message.delete().catch(console.error);
+
     message.reply('Sorry, you are not allowed to swear in this server! Your message has been deleted.')
       .then(msg => {
         setTimeout(() => {
-          msg.delete(); //delete the warning message after 15 seconds
-        }, 15000); //set the delay to 15 seconds (15000 milliseconds)
+          msg.delete().catch(console.error);
+        }, 15000);
       })
       .catch(console.error);
   }
@@ -508,7 +508,6 @@ client.on('messageCreate', message => {
       'Windows 11 may introduce new or unnecessary features that some users do not want or need.',
       'Upgrading to Windows 11 may require reinstalling applications and data, which can be time-consuming and arduous for some users.'
     ];
-
     // Choose a random reason from the array
     const randomIndex = Math.floor(Math.random() * reasons.length);
     const randomReason = reasons[randomIndex];
@@ -517,6 +516,68 @@ client.on('messageCreate', message => {
     message.channel.send(`Here's a reason not to upgrade to Windows 11: ${randomReason}`);
   }
 });
+client.on('messageCreate', message => {
+  if (message.content.startsWith('<@1110480684700668024>, Are you Real?')) {
+    const reasons = [
+      'No i am not real i am just bunch of code.',
+      'Real as Discord JS can be.',
+      'Yes i am real in code.',
+      'I am not humman but i am just bunch of code.'
+    ];
+    // Choose a random reason from the array
+    const randomIndex = Math.floor(Math.random() * reasons.length);
+    const randomReason = reasons[randomIndex];
+
+    // Send the random reason as a message
+    message.channel.send(`${randomReason}`);
+  }
+});
+client.on('messageCreate', message => {
+  if (message.content.startsWith('<@1110480684700668024>, kys')) {
+    const reasons = [
+      'You kill your self.',
+      'I am just bunch of code, I CANT DIE, TRUST ME.',
+      'YOU DIE, I CANT DIE I AM CODE, TRUST ME.',
+      'PLEASE, SWEARING is not allowed.',
+      'Please leave/die, so pepole can be happy'
+    ];
+    // Choose a random reason from the array
+    const randomIndex = Math.floor(Math.random() * reasons.length);
+    const randomReason = reasons[randomIndex];
+
+    // Send the random reason as a message
+    message.channel.send(`${randomReason}`);
+  }
+});
+client.on('messageCreate', message => {
+  if (message.content.startsWith('<@1110480684700668024>, fk')) {
+    const reasons = [
+      'fk.',
+      'Swearing is not allowed.',
+      'wdym by fk? ||fuck||?.',
+      'PLEASE, SWEARING is not allowed.',
+      'Please leave/die, so pepole can be happy'
+    ];
+    // Choose a random reason from the array
+    const randomIndex = Math.floor(Math.random() * reasons.length);
+    const randomReason = reasons[randomIndex];
+
+    // Send the random reason as a message
+    message.channel.send(`${randomReason}`);
+  }
+});
+client.on('message', message => {
+  const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
+  if (msgContent.includes('<@1110480684700668024>, will this work')) {
+  // Check if message ends with a question mark
+      if (msgContent.endsWith('?')) {
+          message.reply('https://tryitands.ee');
+      } else {
+          message.reply('https://tryitands.ee');
+      }
+  }
+});
+
 // Set up the bot's behavior when it receives a message
 client.on('message', message => {
     const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
