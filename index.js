@@ -359,7 +359,7 @@ client.on('message', message => {
   }
 });
 
-const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`'];
+const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk'];
 
 client.on('message', message => {
   if (!message.author.bot && swearWords.some(word => message.content.toLowerCase().match(`\\b${word}\\b`))) {
