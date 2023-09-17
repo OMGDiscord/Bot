@@ -328,7 +328,7 @@ client.on("messageCreate", (message) => {
   }
 });
 
-const welcomeChannelId = "1092532367551385711"
+const welcomeChannelId = "1110480606548213780"
 
 client.on('guildMemberAdd', member => {
   // Get the channel by ID
@@ -340,7 +340,7 @@ client.on('guildMemberAdd', member => {
   }
 });
 client.on("guildMemberRemove", (member) => {
-  const channel = client.channels.cache.get('1094958643163713556'); // Replace 'INSERT_CHANNEL_ID_HERE' with the actual channel ID
+  const channel = client.channels.cache.get('1110480606548213780'); // Replace 'INSERT_CHANNEL_ID_HERE' with the actual channel ID
   channel.send(`${member.user.tag} left the server.`); // Customized message to be sent in the channel
 });
 
