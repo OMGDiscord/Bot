@@ -578,17 +578,6 @@ client.on('message', message => {
       }
   }
 });
-client.on('message', message => {
-  const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
-  if (msgContent.includes('<@1110480684700668024>')) {
-  // Check if message ends with a question mark
-      if (msgContent.endsWith('?')) {
-          message.reply('Hi, I am discord bot that i am created to act like ***fake*** ai and help this discord server to not get raided by 99999 bots');
-      } else {
-          message.reply('Hi, I am discord bot that i am created to act like ***fake*** ai and help this discord server to not get raided by 99999 bots');
-      }
-  }
-});
 // Set up the bot's behavior when it receives a message
 client.on('message', message => {
     const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
