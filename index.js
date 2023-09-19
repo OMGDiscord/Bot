@@ -1,14 +1,10 @@
-const Discord = require("discord.js")
-require("dotenv").config()
-const { Client, MessageAttachment } = require('discord.js');
+const Discord = require("discord.js");
+require("dotenv").config();
+const { Client, Intents, MessageAttachment } = require('discord.js');
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
+});
 
-const client = new Discord.Client({
-    intents: [
-        "GUILDS",
-        "GUILD_MESSAGES",
-        "GUILD_MEMBERS"
-    ]
-})
 //module.exports = {
 //  data: {
 //    name: 'upload',
@@ -344,29 +340,36 @@ client.on("guildMemberRemove", (member) => {
   channel.send(`${member.user.tag} left the server.`); // Customized message to be sent in the channel
 });
 
-client.on('message', message => {
-  if (message.author.bot) return; // ignore messages from other bots
-  if (!message.guild) return; // ignore DMs
-  if ((message.content.includes('http') || message.content.includes('https') || message.content.includes('www.')) && !message.member.roles.cache.some(role => role.permissions.has('ADMINISTRATOR'))) { // check if the message contains a link and the user is not an administrator
-    message.delete(); // delete the message
-    message.reply('Sorry, you are not allowed to post links in this server! Your message has been deleted.') // send a warning message to the person
-      .then(msg => {
+client.on('messageCreate', async (message) => {
+  if (message.author.bot) return; // Ignore messages from other bots
+  if (!message.guild) return; // Ignore DMs
+
+  const hasLinkPermission = message.member.permissions.has('ADMINISTRATOR');
+  const hasLink = /(http|https):\/\/(\S+)\.(\S+)/gi.test(message.content);
+
+  if (hasLink && !hasLinkPermission) {
+    message.delete();
+    message.reply(
+      'Sorry, you are not allowed to post links in this server! Your message has been deleted.'
+    )
+      .then((replyMessage) => {
         setTimeout(() => {
-          msg.delete(); // delete the warning message after 15 seconds
-        }, 15000); // set the delay to 15 seconds (15000 milliseconds)
+          replyMessage.delete();
+        }, 15000);
       })
       .catch(console.error);
   }
 });
 
-const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk'];
+client.on('messageCreate', message => {
+  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk'];
+  const ownerRoleName = 'Owner';
 
-client.on('message', message => {
   if (!message.author.bot && swearWords.some(word => message.content.toLowerCase().match(`\\b${word}\\b`))) {
-    if (!message.member.roles.cache.some(role => role.name === 'Owner')) {
+    if (!message.member.roles.cache.some(role => role.name === ownerRoleName)) {
       message.delete().catch(console.error);
 
-      message.reply('Sorry, you are not allowed to swear in this server! Your message has been deleted.')
+      message.reply('Oops! You are not allowed to swear in this server. Your message has been deleted.')
         .then(msg => {
           setTimeout(() => {
             msg.delete().catch(console.error);
@@ -481,21 +484,21 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 const https = require('https');
 const fs = require('fs');
 const path = require('path'); // <- Add this line
-client.on('message', async msg => {
-    if (msg.attachments.size > 0) {
-        const attachment = msg.attachments.first();
+client.on('messageCreate', async (message) => {
+  if (message.attachments.size > 0) {
+    const attachment = message.attachments.first();
 
-        // Use path.join() to create a file path containing the 'uploads' sub-folder
-        const filePath = path.join('uploads', attachment.name);
-        const file = fs.createWriteStream(filePath);
+    // Use path.join() to create a file path containing the 'uploads' sub-folder
+    const filePath = path.join('uploads', attachment.name);
+    const file = fs.createWriteStream(filePath);
 
-        https.get(attachment.url, response => {
-            response.pipe(file);
-            file.on('finish', () => {
-                console.log(`File ${attachment.name} saved to disk.`);
-            });
-        });
-    }
+    https.get(attachment.url, (response) => {
+      response.pipe(file);
+      file.on('finish', () => {
+        console.log(`File ${attachment.name} saved to disk.`);
+      });
+    });
+  }
 });
 
 client.on('messageCreate', message => {
@@ -518,12 +521,12 @@ client.on('messageCreate', message => {
   }
 });
 client.on('messageCreate', message => {
-  if (message.content.startsWith('<@1110480684700668024>, Are you Real?')) {
+  if (message.content.toLowerCase().startsWith('<@1110480684700668024> , are you real?')) {
     const reasons = [
-      'No i am not real i am just bunch of code.',
+      'No, I am not real. I am just a bunch of code.',
       'Real as Discord JS can be.',
-      'Yes i am real in code.',
-      'I am not humman but i am just bunch of code.'
+      'Yes, I am real in code.',
+      'I am not human, but I am just a bunch of code.'
     ];
     // Choose a random reason from the array
     const randomIndex = Math.floor(Math.random() * reasons.length);
@@ -534,7 +537,7 @@ client.on('messageCreate', message => {
   }
 });
 client.on('messageCreate', message => {
-  if (message.content.startsWith('<@1110480684700668024>, kys')) {
+  if (message.content.startsWith('<@1110480684700668024> , kys')) {
     const reasons = [
       'You kill your self.',
       'I am just bunch of code, I CANT DIE, TRUST ME.',
@@ -551,13 +554,13 @@ client.on('messageCreate', message => {
   }
 });
 client.on('messageCreate', message => {
-  if (message.content.startsWith('<@1110480684700668024>, fk')) {
+  if (message.content.startsWith('<@1110480684700668024> , fk')) {
     const reasons = [
       'fk.',
       'Swearing is not allowed.',
       'wdym by fk? ||fuck||?.',
       'PLEASE, SWEARING is not allowed.',
-      'Please leave/die, so pepole can be happy'
+      'Please leave/die, so people can be happy'
     ];
     // Choose a random reason from the array
     const randomIndex = Math.floor(Math.random() * reasons.length);
@@ -567,32 +570,21 @@ client.on('messageCreate', message => {
     message.channel.send(`${randomReason}`);
   }
 });
-client.on('message', message => {
+client.on('messageCreate', message => {
   const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
-  if (msgContent.includes('<@1110480684700668024>, will this work')) {
-  // Check if message ends with a question mark
-      if (msgContent.endsWith('?')) {
-          message.reply('https://tryitands.ee');
-      } else {
-          message.reply('https://tryitands.ee');
-      }
-  }
-});
-// Set up the bot's behavior when it receives a message
-client.on('message', message => {
-    const msgContent = message.content.toLowerCase(); // Convert the message content to lowercase
-    if (msgContent.includes('will this work')) {
+  
+  if (msgContent.includes('<@1110480684700668024> , will this work')) {
     // Check if message ends with a question mark
-        if (msgContent.endsWith('?')) {
-            message.reply('https://tryitands.ee');
-        } else {
-            message.reply('https://tryitands.ee');
-        }
+    if (msgContent.endsWith('?')) {
+      message.reply('https://tryitands.ee');
+    } else {
+      message.reply('https://tryitands.ee');
     }
-});
-client.on('message', message => {
-  if (message.content.toLowerCase() === 'gofy a phone') {
+  }
+  
+  if (msgContent === 'gofy a phone') {
     message.reply('https://www.youtube.com/shorts/i2--25-N3vs');
   }
 });
+
 client.login(process.env.TOKEN)
