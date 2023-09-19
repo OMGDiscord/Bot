@@ -324,7 +324,7 @@ client.on("messageCreate", (message) => {
   }
 });
 
-const welcomeChannelId = "1110480606548213780"
+const welcomeChannelId = "1110480597333327934"
 
 client.on('guildMemberAdd', member => {
   // Get the channel by ID
