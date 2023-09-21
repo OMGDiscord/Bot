@@ -599,7 +599,8 @@ client.on('message', (message) => {
       return;
     }
 
-    const randomMember = _.sample(membersArray)[1];
+    const shuffledMembers = _.shuffle(membersArray);
+    const randomMember = shuffledMembers[0][1];
 
     const content = message.content.replace('@someone', '');
 
