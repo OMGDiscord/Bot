@@ -588,4 +588,13 @@ client.on('messageCreate', message => {
   }
 });
 
+client.on('message', (message) => {
+  if (message.content.includes('@someone')) {
+    const { members } = message.guild;
+    const randomMember = members.cache.random();
+
+    message.channel.send(`<@${randomMember.user.id}>`);
+  }
+});
+
 client.login(process.env.TOKEN)
