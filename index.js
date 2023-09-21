@@ -596,9 +596,10 @@ client.on('message', (message) => {
       return;
     }
 
-    const randomMember = message.member;
+    const randomIndex = Math.floor(Math.random() * membersArray.length);
+    const randomMember = membersArray[randomIndex][1];
 
-    const content = message.content.replace('@someone', `<@${randomMember.id}>`);
+    const content = message.content.replace('@someone', `<@${randomMember.user.id}>`);
 
     message.delete()
       .then(() => {
