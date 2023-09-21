@@ -596,14 +596,31 @@ client.on('message', (message) => {
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * membersArray.length);
-    const randomMember = membersArray[randomIndex][1];
+    let content = message.content;
+    let mentionedMembers = [];
 
-    const content = message.content.replace('@someone', `<@${randomMember.user.id}>`);
+    for (let i = 0; i < 5; i++) {
+      if (content.includes('@someone')) {
+        const randomIndex = Math.floor(Math.random() * membersArray.length);
+        const randomMember = membersArray[randomIndex][1];
+
+        content = content.replace('@someone', `<@${randomMember.user.id}>`);
+        mentionedMembers.push(randomMember.user.id);
+      } else {
+        break;
+      }
+    }
 
     message.delete()
       .then(() => {
-        message.channel.send(`${message.author} said: ${content}`);
+        let response = `${message.author} said: ${content}`;
+
+        if (mentionedMembers.length > 0) {
+          const mentionString = mentionedMembers.map((member) => `<@${member}>`).join(' ');
+          response += `\n${mentionString}`;
+        }
+
+        message.channel.send(response);
       })
       .catch((error) => {
         console.error('Error deleting message:', error);
