@@ -588,6 +588,8 @@ client.on('messageCreate', message => {
   }
 });
 
+const _ = require('lodash');
+
 client.on('message', (message) => {
   if (message.content.includes('@someone')) {
     const membersArray = Array.from(message.guild.members.cache);
@@ -597,8 +599,7 @@ client.on('message', (message) => {
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * membersArray.length);
-    const randomMember = membersArray[randomIndex][1];
+    const randomMember = _.sample(membersArray)[1];
 
     const content = message.content.replace('@someone', '');
 
