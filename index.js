@@ -597,7 +597,6 @@ client.on('message', (message) => {
     }
 
     let content = message.content;
-    let mentionedMembers = [];
 
     for (let i = 0; i < 5; i++) {
       if (content.includes('@someone')) {
@@ -606,7 +605,6 @@ client.on('message', (message) => {
 
         const mentionString = `<@${randomMember.user.id}>`;
         content = content.replace('@someone', mentionString);
-        mentionedMembers.push(mentionString);
       } else {
         break;
       }
@@ -615,12 +613,7 @@ client.on('message', (message) => {
     message.delete()
       .then(() => {
         let response = `${message.author} said: ${content}`;
-
-        if (mentionedMembers.length > 0) {
-          response += "\n";
-          response = response.concat(mentionedMembers.join(' '));
-        }
-
+        
         message.channel.send(response);
       })
       .catch((error) => {
