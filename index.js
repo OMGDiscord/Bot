@@ -590,20 +590,19 @@ client.on('messageCreate', message => {
 client.on('message', (message) => {
   if (message.content.includes('@someone')) {
     const membersArray = Array.from(message.guild.members.cache);
-    
+
     if (membersArray.length === 0) {
       message.channel.send("No members found in the guild.");
       return;
     }
 
-    const randomIndex = Math.floor(Math.random() * membersArray.length);
-    const randomMember = membersArray[randomIndex][1];
+    const randomMember = message.member;
 
     const content = message.content.replace('@someone', '');
 
     message.delete()
       .then(() => {
-        message.channel.send(`${message.author} said: <@${randomMember.user.id}> ${content}`);
+        message.channel.send(`${message.author} said: ${content}\n<@${randomMember.user.id}>`);
       })
       .catch((error) => {
         console.error('Error deleting message:', error);
