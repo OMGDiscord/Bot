@@ -589,14 +589,15 @@ client.on('messageCreate', message => {
 });
 client.on('message', (message) => {
   if (message.content.includes('@someone')) {
-    const members = message.guild.members.cache;
-
-    if (members.size === 0) {
-      message.channel.send('No members found in the guild.');
+    const membersArray = Array.from(message.guild.members.cache);
+    
+    if (membersArray.length === 0) {
+      message.channel.send("No members found in the guild.");
       return;
     }
 
-    const randomMember = members.random();
+    const randomIndex = Math.floor(Math.random() * membersArray.length);
+    const randomMember = membersArray[randomIndex][1];
 
     const content = message.content.replace('@someone', '');
 
