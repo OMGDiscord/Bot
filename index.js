@@ -604,8 +604,9 @@ client.on('message', (message) => {
         const randomIndex = Math.floor(Math.random() * membersArray.length);
         const randomMember = membersArray[randomIndex][1];
 
-        content = content.replace('@someone', `<@${randomMember.user.id}>`);
-        mentionedMembers.push(randomMember.user.id);
+        const mentionString = `<@${randomMember.user.id}>`;
+        content = content.replace('@someone', mentionString);
+        mentionedMembers.push(mentionString);
       } else {
         break;
       }
@@ -616,7 +617,7 @@ client.on('message', (message) => {
         let response = `${message.author} said: ${content}`;
 
         if (mentionedMembers.length > 0) {
-          const mentionString = mentionedMembers.map((member) => `<@${member}>`).join(' ');
+          const mentionString = mentionedMembers.join(' ');
           response += `\n${mentionString}`;
         }
 
@@ -626,6 +627,7 @@ client.on('message', (message) => {
         console.error('Error deleting message:', error);
       });
   }
+});
 });
 
 client.login(process.env.TOKEN)
