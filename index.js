@@ -598,11 +598,11 @@ client.on('message', (message) => {
 
     const randomMember = message.member;
 
-    const content = message.content.replace('@someone', '');
+    const content = message.content.replace('@someone', `<@${randomMember.id}>`);
 
     message.delete()
       .then(() => {
-        message.channel.send(`${message.author} said: ${content}\n<@${randomMember.user.id}>`);
+        message.channel.send(`${message.author} said: ${content}`);
       })
       .catch((error) => {
         console.error('Error deleting message:', error);
