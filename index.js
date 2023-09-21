@@ -592,14 +592,9 @@ client.on('message', (message) => {
   if (message.content.includes('@someone')) {
     const { members } = message.guild;
     const randomMember = members.cache.random();
+    const content = message.content.replace('@someone', '');
 
-    message.delete()
-      .then(() => {
-        message.channel.send(`${message.author} mentioned <@${randomMember.user.id}>`);
-      })
-      .catch((error) => {
-        console.error('Error deleting message:', error);
-      });
+    message.channel.send(`<@${randomMember.user.id}> ${content}`);
   }
 });
 
