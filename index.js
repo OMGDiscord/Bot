@@ -617,8 +617,8 @@ client.on('message', (message) => {
         let response = `${message.author} said: ${content}`;
 
         if (mentionedMembers.length > 0) {
-          const mentionString = mentionedMembers.join(' ');
-          response += `\n${mentionString}`;
+          response += "\n";
+          response = response.concat(mentionedMembers.join(' '));
         }
 
         message.channel.send(response);
