@@ -594,7 +594,13 @@ client.on('message', (message) => {
     const randomMember = members.cache.random();
     const content = message.content.replace('@someone', '');
 
-    message.channel.send(`<@${randomMember.user.id}> ${content}`);
+    message.delete()
+      .then(() => {
+        message.channel.send(`${message.author} said: <@${randomMember.user.id}> ${content}`);
+      })
+      .catch((error) => {
+        console.error('Error deleting message:', error);
+      });
   }
 });
 
