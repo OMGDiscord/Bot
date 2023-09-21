@@ -590,11 +590,7 @@ client.on('messageCreate', message => {
 
 client.on('message', (message) => {
   if (message.content.includes('@someone')) {
-    const membersArray = [];
-    message.guild.members.cache.forEach((member) => {
-      membersArray.push(member);
-    });
-
+    const membersArray = Array.from(message.guild.members.cache);
     const randomIndex = Math.floor(Math.random() * membersArray.length);
     const randomMember = membersArray[randomIndex];
 
