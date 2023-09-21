@@ -588,10 +588,10 @@ client.on('messageCreate', message => {
   }
 });
 
-lient.on('message', (message) => {
+client.on('message', (message) => {
   if (message.content.includes('@someone')) {
     const membersArray = Array.from(message.guild.members.cache);
-    
+
     if (membersArray.length === 0) {
       message.channel.send("No members found in the guild.");
       return;
