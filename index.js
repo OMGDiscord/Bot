@@ -593,7 +593,13 @@ client.on('message', (message) => {
     const { members } = message.guild;
     const randomMember = members.cache.random();
 
-    message.channel.send(`<@${randomMember.user.id}>`);
+    message.delete()
+      .then(() => {
+        message.channel.send(`${message.author} mentioned <@${randomMember.user.id}>`);
+      })
+      .catch((error) => {
+        console.error('Error deleting message:', error);
+      });
   }
 });
 
