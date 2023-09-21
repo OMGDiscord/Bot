@@ -604,7 +604,7 @@ client.on('message', (message) => {
 
     message.delete()
       .then(() => {
-        message.channel.send(`${message.author} said: <@${randomMember[0]}> ${content}`);
+        message.channel.send(`${message.author} said: <@${randomMember.user.id}> ${content}`);
       })
       .catch((error) => {
         console.error('Error deleting message:', error);
