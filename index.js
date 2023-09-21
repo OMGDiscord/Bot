@@ -588,7 +588,7 @@ client.on('messageCreate', message => {
   }
 });
 
-client.on('message', (message) => {
+lient.on('message', (message) => {
   if (message.content.includes('@someone')) {
     const membersArray = Array.from(message.guild.members.cache);
     
@@ -598,7 +598,7 @@ client.on('message', (message) => {
     }
 
     const randomIndex = Math.floor(Math.random() * membersArray.length);
-    const randomMember = membersArray[randomIndex];
+    const randomMember = membersArray[randomIndex][1];
 
     const content = message.content.replace('@someone', '');
 
