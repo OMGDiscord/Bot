@@ -587,20 +587,16 @@ client.on('messageCreate', message => {
     message.reply('https://www.youtube.com/shorts/i2--25-N3vs');
   }
 });
-
-const _ = require('lodash');
-
 client.on('message', (message) => {
   if (message.content.includes('@someone')) {
-    const membersArray = Array.from(message.guild.members.cache);
+    const members = message.guild.members.cache;
 
-    if (membersArray.length === 0) {
-      message.channel.send("No members found in the guild.");
+    if (members.size === 0) {
+      message.channel.send('No members found in the guild.');
       return;
     }
 
-    const shuffledMembers = _.shuffle(membersArray);
-    const randomMember = shuffledMembers[0][1];
+    const randomMember = members.random();
 
     const content = message.content.replace('@someone', '');
 
