@@ -672,7 +672,7 @@ client.on('message', (message) => {
 
     message.delete()
       .then(() => {
-        let response = `${message.author} said: BRB? BRB? BRAB BRAB, i dont do brb, becouse its haram, ${message.author} said for real for real: ${content}`;
+        let response = `${message.author} said: brb? brb? BRAB BRAB, i dont do brb, becouse its haram, ${message.author} said for real for real: ${content}`;
         
         message.channel.send(response);
       })
