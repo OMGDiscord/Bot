@@ -622,4 +622,64 @@ client.on('message', (message) => {
   }
 });
 
+
+
+client.on('message', (message) => {
+  if (message.content.includes('AFK')) {
+    const membersArray = Array.from(message.guild.members.cache);
+    let content = message.content;
+
+    for (let i = 0; i < 5; i++) {
+      if (content.includes('AFK')) {
+        const randomIndex = Math.floor(Math.random() * membersArray.length);
+        const randomMember = membersArray[randomIndex][1];
+
+        const mentionString = `<@${randomMember.user.id}>`;
+        content = content.replace('AFK', mentionString);
+      } else {
+        break;
+      }
+    }
+
+    message.delete()
+      .then(() => {
+        let response = `${message.author} said: Uh bruh I have went afk, ${message.author} said for real for real: ${content}`;
+        
+        message.channel.send(response);
+      })
+      .catch((error) => {
+        console.error('Error deleting message:', error);
+      });
+  }
+});
+
+client.on('message', (message) => {
+  if (message.content.includes('BRB')) {
+    const membersArray = Array.from(message.guild.members.cache);
+    let content = message.content;
+
+    for (let i = 0; i < 5; i++) {
+      if (content.includes('BRB')) {
+        const randomIndex = Math.floor(Math.random() * membersArray.length);
+        const randomMember = membersArray[randomIndex][1];
+
+        const mentionString = `<@${randomMember.user.id}>`;
+        content = content.replace('BRB', mentionString);
+      } else {
+        break;
+      }
+    }
+
+    message.delete()
+      .then(() => {
+        let response = `${message.author} said: BRB? BRB? BRAB BRAB, i dont do brb, becouse its haram, ${message.author} said for real for real: ${content}`;
+        
+        message.channel.send(response);
+      })
+      .catch((error) => {
+        console.error('Error deleting message:', error);
+      });
+  }
+});
+
 client.login(process.env.TOKEN)
