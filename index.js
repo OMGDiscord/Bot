@@ -648,7 +648,7 @@ client.on('message', (message) => {
     
     message.delete()
       .then(() => {
-        let response = `Uh bruh I have went afk\n${author} said: ${content}`;
+        let response = `Uh bruh I have went afk, ${author} said: ${content}`;
         
         message.channel.send(response);
       })
@@ -665,7 +665,7 @@ client.on('message', (message) => {
     
     message.delete()
       .then(() => {
-        let response = `brb? brb? BRAB BRAB, i dont do brb, because its haram\n${author} said: ${content}`;
+        let response = `brb? brb? BRAB BRAB, i dont do brb, because its haram, ${author} said: ${content}`;
         
         message.channel.send(response);
       })
