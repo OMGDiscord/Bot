@@ -13,8 +13,8 @@ client.on('ready', () => {
 
   if (generalChannel?.isText()) {
     generalChannel.send('Hi, I am OMG Everyhing!');
-    generalChannel.send('And I am ready now');
-    generalChannel.send('Use /help to see a list of my Commands');
+    generalChannel.send('And I am ready now.');
+    generalChannel.send('Use /help to see a list of my Commands.');
   }
 });
 
