@@ -182,6 +182,10 @@ if (command === 'ping') {
     .catch(console.error);
 }
 if (command === 'clear') {
+  if (!message.member.permissions.has('ADMINISTRATOR')) {
+    return message.reply('You do not have permission to use this command.');
+  }
+
   const deleteCount = parseInt(args[0], 10) + 1;
 
   if (!deleteCount || deleteCount < 2 || deleteCount > 100) {
