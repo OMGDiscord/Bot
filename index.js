@@ -12,7 +12,9 @@ client.on('ready', () => {
   const generalChannel = client.channels.cache.get(GENERAL_CHANNEL_ID);
 
   if (generalChannel?.isText()) {
-    generalChannel.send('Bot has started!');
+    generalChannel.send('Hi, I am OMG Everyhing!');
+    generalChannel.send('And I am ready now');
+    generalChannel.send('Use /help to see a list of my Commands');
   }
 });
 
