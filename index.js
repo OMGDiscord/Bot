@@ -5,6 +5,17 @@ const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
 });
 
+const GENERAL_CHANNEL_ID = '1155119794102747277';
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}`);
+  const generalChannel = client.channels.cache.get(GENERAL_CHANNEL_ID);
+
+  if (generalChannel?.isText()) {
+    generalChannel.send('Bot has started!');
+  }
+});
+
 //module.exports = {
 //  data: {
 //    name: 'upload',
