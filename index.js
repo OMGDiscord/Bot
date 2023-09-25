@@ -660,7 +660,7 @@ client.on('message', (message) => {
 
     message.delete()
       .then(() => {
-        let response = `${message.author} said: Uh bruh I have went afk, ${message.author} said for real for real: ${content}`;
+        let response = `${message.author} said: Uh bruh I have went afk, ${message.author} said for real ` + 'for real: ' + `${content}`;
         
         message.channel.send(response);
       })
@@ -689,7 +689,7 @@ client.on('message', (message) => {
 
     message.delete()
       .then(() => {
-        let response = `${message.author} said: brb? brb? BRAB BRAB, i dont do brb, becouse its haram, ${message.author} said for real for real: ${content}`;
+        let response = `${message.author} said: brb? brb? BRAB BRAB, i dont do brb, becouse its haram, ${message.author} said for real ` + 'for real: ' + `${content}`;
         
         message.channel.send(response);
       })
