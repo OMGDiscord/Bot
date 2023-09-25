@@ -642,7 +642,7 @@ client.on('message', (message) => {
 
 
 client.on('message', (message) => {
-  if (message.content.includes('AFK')) {
+  if (message.content.includes('AFK') && !message.author.bot) {
     const author = message.author;
     const content = message.content.replace('BRB', '');
     
@@ -659,7 +659,7 @@ client.on('message', (message) => {
 });
 
 client.on('message', (message) => {
-  if (message.content.includes('BRB')) {
+  if (message.content.includes('BRB') && !message.author.bot) {
     const author = message.author;
     const content = message.content.replace('BRB', '');
     
