@@ -12,9 +12,7 @@ client.on('ready', () => {
   const generalChannel = client.channels.cache.get(GENERAL_CHANNEL_ID);
 
   if (generalChannel?.isText()) {
-    generalChannel.send('Hi, I am OMG Everyhing!');
-    generalChannel.send('And I am ready now.');
-    generalChannel.send('Use /help to see a list of my Commands.');
+    generalChannel.send('Hi, I am OMG Everything!\nAnd I am ready now.\nUse /help to see a list of my commands.');
   }
 });
 
@@ -362,7 +360,7 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return; // Ignore messages from other bots and self
   if (!message.guild) return; // Ignore DMs
 
-  const allowedDomains = ['wiki.archlinux.org', 'wiki.artixlinux.org', 'ubuntu.com', 'fedoraproject.org', 'microsoft.com', 'freebsd.org', 'gentoo.org', 'github.com', 'gitlab.gnome.org', 'bugs.kde.org', 'kde.org', 'gnome.org', 'pop.system76.com', 'linuxmint.com'];
+  const allowedDomains = ['wiki.archlinux.org', 'wiki.artixlinux.org', 'ubuntu.com', 'fedoraproject.org', 'microsoft.com', 'freebsd.org', 'gentoo.org', 'github.com', 'gitlab.gnome.org', 'bugs.kde.org', 'kde.org', 'gnome.org', 'pop.system76.com', 'linuxmint.com', 'tenor.com'];
   const hasLinkPermission = message.member.permissions.has('ADMINISTRATOR');
   const messageContent = message.content.toLowerCase(); // Convert message content to lowercase for case-insensitive matching
 
