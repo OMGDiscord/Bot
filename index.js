@@ -466,10 +466,18 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
 client.on('messageUpdate', (oldMessage, newMessage) => {
   const guild = oldMessage.guild;
   const modLogChannel = guild.channels.cache.find(channel => channel.name === 'modlogs');
+  
+  // Ignore messages edited by the bot itself
+  if (oldMessage.author.bot) {
+    return;
+  }
+
   if (modLogChannel) {
-    modLogChannel.send(`A message by ${oldMessage.author.tag} was edited in ${oldMessage.channel}: "${oldMessage.content}" was changed to "${newMessage.content}"`);
+    modLogChannel.send(`A message by ${oldMessage.author.tag} was edited in ${oldMessage.channel}: "${oldMessage.content}" was changed to "${newMessage.content}"`)
+      .catch(console.error);
   }
 });
+
 // Role add listener
 client.on('guildMemberUpdate', (oldMember, newMember) => {
   // Check if roles were added to the member
@@ -677,7 +685,7 @@ client.on('message', (message) => {
         console.error('Error deleting message:', error);
       });
   }
-});
+}); 
 
 client.on('messageCreate', async (message) => {
   const adminPermission = message.member?.permissions.has('ADMINISTRATOR');
