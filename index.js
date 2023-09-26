@@ -682,7 +682,9 @@ client.on('message', (message) => {
 });
 
 client.on('messageCreate', async (message) => {
-  if (message.channel.name === 'general-no-chat') {
+  const adminPermission = message.member?.permissions.has('ADMINISTRATOR');
+  
+  if (message.channel.name === 'general-no-chat' && !adminPermission && message.author.id !== client.user.id) {
     message.delete();
     const userTag = `<@${message.author.id}>`;
     message.channel.send(`${userTag} said: ${message.content}`);
