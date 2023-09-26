@@ -690,5 +690,12 @@ client.on('messageCreate', async (message) => {
     message.channel.send(`${userTag} said: ${message.content}`);
   }
 });
-
+client.on('messageCreate', async (message) => {
+  if (message.author.bot) return;
+  
+  if (message.content.includes(client.user.id)) {
+    const reply = "Hi, I am OMG Everything!\nAnd I am ready now.\nUse /help to see a list of my commands.";
+    message.reply(reply);
+  }
+});
 client.login(process.env.TOKEN)
