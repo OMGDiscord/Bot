@@ -681,4 +681,12 @@ client.on('message', (message) => {
   }
 });
 
+client.on('messageCreate', async (message) => {
+  if (message.channel.name === 'general-no-chat') {
+    message.delete();
+    const userTag = `<@${message.author.id}>`;
+    message.channel.send(`${userTag} said: ${message.content}`);
+  }
+});
+
 client.login(process.env.TOKEN)
