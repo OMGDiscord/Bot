@@ -687,7 +687,8 @@ client.on('messageCreate', async (message) => {
   if (message.channel.name === 'general-no-chat' && !adminPermission && message.author.id !== client.user.id) {
     message.delete();
     const userTag = `<@${message.author.id}>`;
-    message.channel.send(`${userTag} said: ${message.content}`);
+    const botTag = `<@${client.user.id}>`;
+    message.channel.send(`${userTag} said: ${message.content}\n${userTag} and ${botTag}, you've been tagged!`);
   }
 });
 
