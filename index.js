@@ -359,14 +359,21 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on('messageCreate', async (message) => {
-  if (message.author.bot) return; // Ignore messages from other bots
+  if (message.author.bot) return; // Ignore messages from other bots and self
   if (!message.guild) return; // Ignore DMs
 
+  const allowedDomains = ['wiki.archlinux.org', 'wiki.artixlinux.org', 'ubuntu.com', 'fedoraproject.org', 'microsoft.com', 'freebsd.org', 'gentoo.org', 'github.com', 'gitlab.gnome.org', 'bugs.kde.org', 'kde.org', 'gnome.org', 'pop.system76.com', 'linuxmint.com'];
   const hasLinkPermission = message.member.permissions.has('ADMINISTRATOR');
-  const hasLink = /(http|https):\/\/(\S+)\.(\S+)/gi.test(message.content);
-  const isArchOrArtixWiki = /wiki\.(archlinux|artixlinux)\.org/gi.test(message.content);
+  const messageContent = message.content.toLowerCase(); // Convert message content to lowercase for case-insensitive matching
 
-  if (hasLink && !hasLinkPermission && !isArchOrArtixWiki) {
+  const hasLink = /(http|https):\/\/(\S+)\.(\S+)/gi.test(messageContent);
+
+  const isAllowedLink = allowedDomains.some((domain) => {
+    const regex = new RegExp(`${domain.replace('.', '\\.')}`, 'gi');
+    return regex.test(messageContent);
+  });
+
+  if (hasLink && !hasLinkPermission && !isAllowedLink && message.author.id !== client.user.id) {
     message.delete();
     message.reply(
       'Sorry, you are not allowed to post links in this server! Your message has been deleted.'
