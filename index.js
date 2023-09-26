@@ -682,15 +682,12 @@ client.on('message', (message) => {
 });
 
 client.on('messageCreate', async (message) => {
-  if (message.author.bot) return;
-
   const adminPermission = message.member?.permissions.has('ADMINISTRATOR');
   
-  if (message.channel.name === 'general-no-chat' && !adminPermission && message.content.startsWith(`<@${client.user.id}>`)) {
+  if (message.channel.name === 'general-no-chat' && !adminPermission && message.author.id !== client.user.id) {
+    message.delete();
     const userTag = `<@${message.author.id}>`;
-    const botReply = "Thank you for your message! How can I assist you?";
     message.channel.send(`${userTag} said: ${message.content}`);
-    message.channel.send(`${userTag}, here's the bot's reply: ${botReply}`);
   }
 });
 
