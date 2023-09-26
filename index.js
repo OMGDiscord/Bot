@@ -386,21 +386,19 @@ client.on('messageCreate', async (message) => {
 });
 
 client.on('messageCreate', message => {
-  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk'];
+  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk', 'fk'];
   const ownerRoleName = 'Owner';
 
-  if (!message.author.bot && swearWords.some(word => message.content.toLowerCase().match(`\\b${word}\\b`))) {
-    if (!message.member.roles.cache.some(role => role.name === ownerRoleName)) {
-      message.delete().catch(console.error);
+  if (!message.author.bot && !message.member.roles.cache.some(role => role.name === ownerRoleName) && !message.member.permissions.has('ADMINISTRATOR') && swearWords.some(word => message.content.toLowerCase().match(`\\b${word}\\b`))) {
+    message.delete().catch(console.error);
 
-      message.reply('Oops! You are not allowed to swear in this server. Your message has been deleted.')
-        .then(msg => {
-          setTimeout(() => {
-            msg.delete().catch(console.error);
-          }, 15000);
-        })
-        .catch(console.error);
-    }
+    message.reply('Oops! You are not allowed to swear in this server. Your message has been deleted.')
+      .then(msg => {
+        setTimeout(() => {
+          msg.delete().catch(console.error);
+        }, 15000);
+      })
+      .catch(console.error);
   }
 });
 
