@@ -364,8 +364,9 @@ client.on('messageCreate', async (message) => {
 
   const hasLinkPermission = message.member.permissions.has('ADMINISTRATOR');
   const hasLink = /(http|https):\/\/(\S+)\.(\S+)/gi.test(message.content);
+  const isArchOrArtixWiki = /wiki\.(archlinux|artixlinux)\.org/gi.test(message.content);
 
-  if (hasLink && !hasLinkPermission) {
+  if (hasLink && !hasLinkPermission && !isArchOrArtixWiki) {
     message.delete();
     message.reply(
       'Sorry, you are not allowed to post links in this server! Your message has been deleted.'
