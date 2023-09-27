@@ -639,19 +639,9 @@ client.on('message', (message) => {
       }
     }
 
-    message.channel.send(content);
-  }
-});
+    message.delete(); // Deleting the original message
 
-    message.delete()
-      .then(() => {
-        let response = `${message.author} said: ${content}`;
-        
-        message.channel.send(response);
-      })
-      .catch((error) => {
-        console.error('Error deleting message:', error);
-      });
+    message.channel.send(content);
   }
 });
 
