@@ -641,7 +641,8 @@ client.on('message', (message) => {
 
     message.delete(); // Deleting the original message
 
-    message.channel.send(content);
+    const response = `<@${message.author.id}> said: ${content}`;
+    message.channel.send(response);
   }
 });
 
