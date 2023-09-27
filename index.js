@@ -617,7 +617,7 @@ client.on('messageCreate', message => {
   }
 });
 client.on('message', (message) => {
-  if (message.content.includes('@someone')) {
+  if (message.content.includes('@someone') && message.author !== client.user) {
     const membersArray = Array.from(message.guild.members.cache);
 
     if (membersArray.length === 0) {
@@ -638,6 +638,10 @@ client.on('message', (message) => {
         break;
       }
     }
+
+    message.channel.send(content);
+  }
+});
 
     message.delete()
       .then(() => {
