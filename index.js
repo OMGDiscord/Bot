@@ -612,7 +612,7 @@ client.on('messageCreate', message => {
     }
   }
 
-  if (msgContent.includes('<@1110480684700668024> , will this work2')) {
+  if (msgContent.includes('<@1110480684700668024> , will this linux work')) {
     // Check if message ends with a question mark
     if (msgContent.endsWith('?')) {
       message.channel.send({
