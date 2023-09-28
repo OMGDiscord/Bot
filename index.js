@@ -615,11 +615,11 @@ client.on('messageCreate', message => {
   if (msgContent.includes('<@1110480684700668024> , will this work2')) {
     // Check if message ends with a question mark
     if (msgContent.endsWith('?')) {
-      message.reply.send({
+      message.channel.send({
         files: ['./linuxitandsee.mp4']
     });
     } else {
-      message.reply.send({
+      message.channel.send({
         files: ['./linuxitandsee.mp4']
     });
     }
