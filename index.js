@@ -611,7 +611,21 @@ client.on('messageCreate', message => {
       message.reply('https://tryitands.ee');
     }
   }
-  
+
+  if (msgContent.includes('<@1110480684700668024> , will this work2')) {
+    // Check if message ends with a question mark
+    if (msgContent.endsWith('?')) {
+      message.reply.send({
+        files: ['./linuxitandsee.mp4']
+    });
+    } else {
+      message.reply.send({
+        files: ['./linuxitandsee.mp4']
+    });
+    }
+  }
+
+
   if (msgContent === 'gofy a phone') {
     message.reply('https://www.youtube.com/shorts/i2--25-N3vs');
   }
