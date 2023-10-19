@@ -386,7 +386,7 @@ client.on('messageCreate', async (message) => {
 });
 
 client.on('messageCreate', async (message) => {
-  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk', 'fk', 'gay', 'lesbian', 'porn', 'fuсk'];
+  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk', 'fk', 'gay', 'lesbian', 'porn'];
   const ownerRoleName = 'Owner';
   const timeoutDuration = 60000; // 1 minute in milliseconds
 
