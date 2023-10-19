@@ -400,15 +400,15 @@ client.on('messageCreate', async (message) => {
 
     const user = message.author;
 
-    const timeoutRole = message.guild.roles.cache.get('1164585849950847036'); // Replace '1164585849950847036' with the actual ID of the timeout role
+    const timeoutRole = message.guild.roles.cache.get('1164585849950847036'); // Replace 'TimeoutRoleID' with the actual ID of the timeout role
 
     try {
-      await message.member.roles.add(timeoutRole);
-
-      message.reply(`Oops! You are not allowed to swear in this server. Your message has been deleted, and you have been muted for 1 minute.`);
-
+      await user.roles.add(1164585849950847036);
+  
+      message.reply(`Oops! You are not allowed to swear in this server. Your message has been deleted and you have been muted for 1 minute.`);
+  
       setTimeout(() => {
-        message.member.roles.remove(timeoutRole);
+        user.roles.remove(1164585849950847036);
         message.channel.send(`<@${user.id}>, your mute has been lifted. You can now send messages in the server.`);
       }, timeoutDuration);
     } catch (error) {
@@ -416,7 +416,6 @@ client.on('messageCreate', async (message) => {
     }
   }
 });
-
 
 client.on('guildMemberAdd', (member) => {
   const guild = member.guild;
