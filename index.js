@@ -398,20 +398,13 @@ client.on('messageCreate', async (message) => {
   ) {
     message.delete().catch(console.error);
 
-    const user = message.author;
-
-    const timeoutRole = message.guild.roles.cache.get('1164585849950847036'); // Replace 'TimeoutRoleID' with the actual ID of the timeout role
+    message.reply('Oops! You are not allowed to swear in this server. Your message has been deleted.');
 
     try {
-      await user.roles.add(timeoutRole);
-  
-      message.reply(`Oops! You are not allowed to swear in this server. Your message has been deleted and you have been muted for 1 minute.`);
-  
-      user.send(`You are temporarily muted for 1 minute due to swearing in the server.`);
-  
+      await message.member.roles.add('1164585849950847036'); // Replace 'TimeoutRoleID' with the actual ID of the timeout role
+
       setTimeout(() => {
-        user.roles.remove(timeoutRole);
-        user.send(`Your mute has been lifted. You can now send messages in the server.`);
+        message.member.roles.remove('1164585849950847036'); // Remove the timeout role after the specified timeout duration
       }, timeoutDuration);
     } catch (error) {
       console.error(error);
