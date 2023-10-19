@@ -385,22 +385,31 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-client.on('messageCreate', message => {
-  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk', 'fk', 'gay', 'lasbian', 'porn'];
+client.on('messageCreate', async (message) => {
+  const swearWords = ['fuck', 'shit', 'wtf', 'fu`ck`', 'nigger', 'Fuxk', 'fk', 'gay', 'lesbian', 'porn'];
   const ownerRoleName = 'Owner';
+  const timeoutDuration = 60000; // 1 minute in milliseconds
 
-  if (!message.author.bot && !message.member.roles.cache.some(role => role.name === ownerRoleName) && !message.member.permissions.has('ADMINISTRATOR') && swearWords.some(word => message.content.toLowerCase().match(`\\b${word}\\b`))) {
+  if (
+    !message.author.bot &&
+    !message.member.roles.cache.some((role) => role.name === ownerRoleName) &&
+    !message.member.permissions.has('ADMINISTRATOR') &&
+    swearWords.some((word) => message.content.toLowerCase().match(`\\b${word}\\b`))
+  ) {
     message.delete().catch(console.error);
 
-    message.reply('Oops! You are not allowed to swear in this server. Your message has been deleted.')
-      .then(msg => {
-        setTimeout(() => {
-          msg.delete().catch(console.error);
-        }, 15000);
-      })
-      .catch(console.error);
+    message.reply('Oops! You are not allowed to swear in this server. Your message has been deleted.');
+
+    try {
+      await message.member.roles.add('TimeoutRoleID'); // Replace 'TimeoutRoleID' with the actual ID of the timeout role
+
+      setTimeout(() => {
+        message.member.roles.remove('TimeoutRoleID'); // Remove the timeout role after the specified timeout duration
+      }, timeoutDuration);
+    } catch (error) {
+      console.error(error);
+    }
   }
-});
 
 client.on('guildMemberAdd', (member) => {
   const guild = member.guild;
