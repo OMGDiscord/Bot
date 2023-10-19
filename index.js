@@ -407,9 +407,11 @@ client.on('messageCreate', async (message) => {
   
       message.reply(`Oops! You are not allowed to swear in this server. Your message has been deleted and you have been muted for 1 minute.`);
   
+      user.send(`You are temporarily muted for 1 minute due to swearing in the server.`);
+  
       setTimeout(() => {
         user.roles.remove(timeoutRole);
-        message.channel.send(`<@${user.id}>, your mute has been lifted. You can now send messages in the server.`);
+        user.send(`Your mute has been lifted. You can now send messages in the server.`);
       }, timeoutDuration);
     } catch (error) {
       console.error(error);
