@@ -698,12 +698,23 @@ client.on('message', (message) => {
 
 client.on('messageCreate', async (message) => {
   const adminPermission = message.member?.permissions.has('ADMINISTRATOR');
-  
-  if (message.channel.name === 'general-no-chat' && !adminPermission && message.author.id !== client.user.id) {
+
+  if (
+    message.channel.name === 'general-no-chat' &&
+    !adminPermission &&
+    message.author.id !== client.user.id
+  ) {
     message.delete();
     const userTag = `<@${message.author.id}>`;
-    message.channel.send(`${userTag} said: ${message.content}`);
+
+    // Replace @everyone and @here with something that won't trigger the mentions
+    const sanitizedContent = message.content
+      .replace(/@everyone/g, '@\u200beveryone')
+      .replace(/@here/g, '@\u200bhere');
+
+    message.channel.send(`${userTag} said: ${sanitizedContent}`);
   }
 });
+
 
 client.login(process.env.TOKEN)
