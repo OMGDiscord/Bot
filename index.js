@@ -716,5 +716,14 @@ client.on('messageCreate', async (message) => {
   }
 });
 
+client.on('messageCreate', async (message) => {
+  if (
+    !message.author.bot && // Ignore bot messages
+    message.content.toLowerCase() === 'can we make the bot racist and offensive?'
+  ) {
+    message.reply('no');
+  }
+});
+
 
 client.login(process.env.TOKEN)
