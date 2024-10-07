@@ -712,9 +712,17 @@ client.on('messageCreate', async (message) => {
       .replace(/@everyone/g, '@\u200beveryone')
       .replace(/@here/g, '@\u200bhere');
 
-    message.channel.send(`${userTag} said: ${sanitizedContent}`);
+    // Split the message content into chunks of 2000 characters or less
+    const messageChunks = sanitizedContent.match(/.{1,2000}/g);
+
+    if (messageChunks) {
+      for (const chunk of messageChunks) {
+        await message.channel.send(`${userTag} said: ${chunk}`);
+      }
+    }
   }
 });
+
 
 client.on('messageCreate', async (message) => {
   if (
