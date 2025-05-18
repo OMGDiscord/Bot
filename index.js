@@ -6,13 +6,15 @@ const client = new Client({
 });
 
 const GENERAL_CHANNEL_ID = '1164581616845328585';
+const OMG_BOTS_CHANNEL_ID = '1373583399654129674';
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
   const generalChannel = client.channels.cache.get(GENERAL_CHANNEL_ID);
+  const omgbotsChannel = client.channels.cache.get(OMG_BOTS_CHANNEL_ID);
 
-  if (generalChannel?.isText()) {
-    generalChannel.send('Hi, I am OMG Everything!\nAnd I am ready now.\nUse /help to see a list of my commands.');
+  if (omgbotsChannel?.isText()) {
+    omgbotsChannel.send('Hi, I am OMG Everything!\nAnd I am ready now.\nUse /help to see a list of my commands.');
   }
 });
 
